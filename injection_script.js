@@ -2337,3 +2337,14 @@ ensureDomLoaded(()=>{
 	},100)
 	setTimeout(()=>clearInterval(dT),10000)//
 },true)
+domainBypass(/linkvertise\.(com|net)|link-to\.net|linkvertise\.download/,()=>{
+ 
+ fetch("https://linkunshortner.herokuapp.com/api?url="+window.location).then(r=>r.json()).then(json=>{
+     if(json.success) {
+         safelyNavigate(json.bypassedlink)
+     } else {
+         alert("Bypass failed: "+json.errormsg)
+     }
+ })
+ 
+})
